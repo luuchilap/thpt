@@ -43,7 +43,7 @@ export default function StartScreen({ onStart, isLoading }) {
 
       {leaderboard.length > 0 && (
         <div className="leaderboard-box">
-          <h3><Trophy size={18} color="#f59e0b" /> Top 5 Sĩ Tử</h3>
+          <h3><Trophy size={18} color="#f59e0b" /> Top 5</h3>
           <ul className="leaderboard-list">
             {leaderboard.map((player, idx) => (
               <li key={player.id}>
