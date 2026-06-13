@@ -57,8 +57,6 @@ export default function GameOverScreen({ score, maxStreak, lastQuestion, userAns
 
   return (
     <div className="animate-fade-in">
-      <h1 className="gameover-title">Trượt Tốt Nghiệp!</h1>
-      
       <div className="result-box">
         <div className="result-item">
           <span className="result-label">Tổng điểm</span>
@@ -109,7 +107,7 @@ export default function GameOverScreen({ score, maxStreak, lastQuestion, userAns
             </button>
           </div>
           {nameError && (
-            <div style={{ color: 'var(--false-color)', fontSize: '0.9rem', marginBottom: '24px', fontWeight: '600' }}>
+            <div style={{ color: 'var(--danger-color)', fontSize: '0.9rem', marginBottom: '24px', fontWeight: '600' }}>
               {nameError}
             </div>
           )}
