@@ -72,7 +72,7 @@ export default function GameScreen({
       <div style={{ position: 'relative', marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="timer-container" style={{ margin: 0, opacity: isTimerHidden ? 0 : 1, transition: 'opacity 0.3s ease', width: '100%' }}>
           <div 
-            className={`timer-bar ${timeLeft < 30 ? 'timer-danger' : ''}`} 
+            className={`timer-bar ${timeLeft <= 25 ? 'timer-danger' : timeLeft <= 50 ? 'timer-warning' : ''}`} 
             style={{ width: `${timeLeft}%` }}
           ></div>
         </div>

@@ -1,5 +1,5 @@
 import { AlertCircle, Save } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 
 export default function GameOverScreen({ score, maxStreak, lastQuestion, userAnswer, explanation, onRestart, onHome }) {
@@ -15,6 +15,19 @@ export default function GameOverScreen({ score, maxStreak, lastQuestion, userAns
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [nameError, setNameError] = useState('');
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Bỏ qua nếu người dùng đang gõ tên trong input
+      if (document.activeElement.tagName === 'INPUT') return;
+      if (e.key === 'Enter' || e.key === 'Backspace') {
+        e.preventDefault();
+        onRestart();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onRestart]);
 
   const submitScore = async () => {
     if (!playerName.trim()) return;
@@ -96,11 +109,14 @@ export default function GameOverScreen({ score, maxStreak, lastQuestion, userAns
           <div className="submit-box" style={{ marginBottom: nameError ? '8px' : '24px' }}>
             <input 
               type="text" 
-              placeholder="Nhập tên của bạn..." 
-              value={playerName} 
-              onChange={e => { setPlayerName(e.target.value); setNameError(''); }} 
-              maxLength={15}
               className="name-input"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value.substring(0, 20))}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') submitScore();
+              }}
+              disabled={isSubmitting}
+              placeholder="Nhập tên của bạn..."
             />
             <button className="btn-save" onClick={submitScore} disabled={isSubmitting || !playerName.trim()}>
               {isSubmitting ? 'Đang lưu...' : <><Save size={18} /> Lưu Điểm</>}
