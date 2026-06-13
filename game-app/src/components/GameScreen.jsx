@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import HUD from './HUD';
 
 export default function GameScreen({ 
@@ -81,16 +82,16 @@ export default function GameScreen({
         <button 
           className={`btn-game btn-false ${activeBtn === false ? 'active' : ''}`}
           onClick={() => handleAnswer(false)}
+          aria-label="Sai"
         >
-          SAI
-          <span>Phím A / &larr;</span>
+          <ArrowLeft size={48} strokeWidth={3} />
         </button>
         <button 
           className={`btn-game btn-true ${activeBtn === true ? 'active' : ''}`}
           onClick={() => handleAnswer(true)}
+          aria-label="Đúng"
         >
-          ĐÚNG
-          <span>Phím D / &rarr;</span>
+          <ArrowRight size={48} strokeWidth={3} />
         </button>
       </div>
     </div>
