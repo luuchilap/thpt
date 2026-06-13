@@ -8,7 +8,8 @@ export default function GameScreen({
   streak, 
   popKey, 
   onAnswer, 
-  onTimeout 
+  onTimeout,
+  isTimerHidden 
 }) {
   const [timeLeft, setTimeLeft] = useState(100);
   const [activeBtn, setActiveBtn] = useState(null);
@@ -67,7 +68,7 @@ export default function GameScreen({
     <div key={`game-${currentQuestion.q}`} className="animate-fade-in">
       <HUD score={score} streak={streak} popKey={popKey} />
       
-      <div className="timer-container">
+      <div className="timer-container" style={{ opacity: isTimerHidden ? 0 : 1, transition: 'opacity 0.3s ease' }}>
         <div 
           className={`timer-bar ${timeLeft < 30 ? 'timer-danger' : ''}`} 
           style={{ width: `${timeLeft}%` }}
