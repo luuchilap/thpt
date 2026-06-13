@@ -20,8 +20,8 @@ export default function ParticleTrail() {
     resize();
 
     const handleMouseMove = (e) => {
-      // Giảm lượng bụi: Chỉ 30% cơ hội tạo ra 1 hạt mỗi khi di chuyển chuột
-      if (Math.random() > 0.3) return;
+      // Giảm tối đa lượng bụi: Chỉ 5% cơ hội tạo ra 1 hạt mỗi khi di chuyển chuột (rất thưa thớt)
+      if (Math.random() > 0.05) return;
       
       particles.push({
         x: e.clientX,
