@@ -19,8 +19,9 @@ export default function GameOverScreen({ score, maxStreak, lastQuestion, userAns
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Bỏ qua nếu người dùng đang gõ tên trong input
-      if (document.activeElement.tagName === 'INPUT') return;
-      if (e.key === 'Enter' || e.key === 'Backspace') {
+      if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+      
+      if (e.key === 'Enter' || e.code === 'Enter' || e.key === 'Backspace' || e.code === 'Backspace') {
         e.preventDefault();
         onRestart();
       }
