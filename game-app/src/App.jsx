@@ -23,6 +23,7 @@ export default function App() {
   
   const [popKey, setPopKey] = useState(0);
   const [isShaking, setIsShaking] = useState(false);
+  const [gameSize, setGameSize] = useState('medium');
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -117,8 +118,16 @@ export default function App() {
   }, [triggerShake, currentQuestion]);
 
   return (
-    <div className={`game-container ${isShaking ? 'animate-shake' : ''}`}>
-      {screen === 'start' && <StartScreen onStart={startGame} isLoading={isLoading} />}
+    <>
+      {screen === 'game' && (
+        <div className="size-toggle-wrapper">
+          <button className={`size-btn ${gameSize === 'small' ? 'active' : ''}`} onClick={() => setGameSize('small')}>S</button>
+          <button className={`size-btn ${gameSize === 'medium' ? 'active' : ''}`} onClick={() => setGameSize('medium')}>M</button>
+          <button className={`size-btn ${gameSize === 'large' ? 'active' : ''}`} onClick={() => setGameSize('large')}>L</button>
+        </div>
+      )}
+      <div className={`game-container size-${gameSize} ${isShaking ? 'animate-shake' : ''}`}>
+        {screen === 'start' && <StartScreen onStart={startGame} isLoading={isLoading} />}
       
       {screen === 'game' && currentQuestion && (
         <GameScreen 
@@ -142,6 +151,7 @@ export default function App() {
           onHome={() => setScreen('start')}
         />
       )}
-    </div>
+      </div>
+    </>
   );
 }
